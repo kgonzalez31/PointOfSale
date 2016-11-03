@@ -14,7 +14,7 @@ function addItem()
         // call asCurrency() by with the value of runningTotal and assign the return value to dollars
         document.getElementById("subtotal").innerHTML=dollars;// update the innerHTML of the span with the id "subtotal" to be dollars
         newItem = document.getElementById("price").value = "";// update the value of the input with the id "price" to be an empty string
-        setCookie(preTax, runningTotal, 3)// update a cookie called "preTax" with the value of runningTotal
+        setCookie("preTax", runningTotal, 3 )// update a cookie called "preTax" with the value of runningTotal
           }
 }
 //takes a number and gives a string with the number displayed as USD currency
@@ -44,4 +44,13 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+function calculateReceipt() {
+     var receiptSubtotal = getCookie("preTax");
+      receiptSubtotal = Number(receiptSubtotal);
+      var receiptTax = Number(receiptSubtotal * 0.075);
+    var receiptTotal = Number(receiptSubtotal + receiptTax);
+       document.getElementById("sub").innerHTML = asCurrency(receiptSubtotal);
+       document.getElementById("tax").innerHTML = asCurrency(receiptTax);
+       document.getElementById("tot").innerHTML = asCurrency(receiptTotal);
 }
